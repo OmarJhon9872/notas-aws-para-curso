@@ -1,0 +1,5 @@
+aws kms encrypt --key-id IDCLAVE --plaintext fileb://fichero.txt --output text --query CiphertextBlob | base64 --decode > ficheroencriptado.txt
+aws kms decrypt --ciphertext-blob fileb://ficheroencriptado.txt --output text --query Plaintext | base64 --decode > ficherodesencriptado.txt
+
+aws kms re-encrypt --destination-key-id IDCLAVE --ciphertext-blob fileb://ficheroencriptado.txt | base64 > nuevoficherodesencriptado.txt 
+aws kms enable-key-rotation --key-id IDCLAVE
